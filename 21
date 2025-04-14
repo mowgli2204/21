@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turning 21!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #ff94d4, #ff69b4);
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        header {
+            padding: 80px;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-out;
+        }
+        header h1 {
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            animation: fadeIn 2s ease-out;
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .game-container, .memory-container, .wish-wall {
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+        }
+        .game-container h2, .memory-container h2, .wish-wall h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 1.4rem;
+        }
+        .answer, .upload-btn, .wish-btn {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .answer:hover, .upload-btn:hover, .wish-btn:hover {
+            background-color: #ff429e;
+        }
+        #childhood-pic img {
+            width: 50%;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .input-field {
+            margin-top: 10px;
+            padding: 10px;
+            width: 60%;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        #childhood-pic {
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+        #childhood-pic p {
+            font-size: 1.2rem;
+            color: #fff;
+            font-style: italic;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎉 Turning 21! 🎉</h1>
+        <div id="confetti" class="confetti"></div>
+    </header>
+
+    <!-- Childhood Picture Section -->
+    <div id="childhood-pic">
+        <h2>Throwback to My Childhood!</h2>
+        <img src="your-childhood-pic.jpg" alt="Childhood Picture">
+        <p>Cute moments that shaped me into who I am today!</p>
+    </div>
+
+    <!-- Game: How Well Do You Know Me? -->
+    <div class="game-container">
+        <h2>How Well Do You Know Me?</h2>
+        <div class="question">
+            <p>Am I a morning person or night owl?</p>
+            <button class="answer" onclick="checkAnswer('night')">Night Owl</button>
+        </div>
+        <div class="question">
+            <p>What’s my go-to comfort food?</p>
+            <button class="answer" onclick="checkAnswer('beetroot garlic bread')">Beetroot Garlic Bread</button>
+        </div>
+        <div class="question">
+            <p>What’s something I always say or a phrase I use often? (Fill in the blank)</p>
+            <input type="text" id="phrase-answer" class="input-field" placeholder="Your answer here">
+            <button class="answer" onclick="checkPhrase()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Memory Upload Section -->
+    <div class="memory-container">
+        <h2>Upload a Memory of Us!</h2>
+        <input type="file" id="memory-upload" accept="image/*">
+        <button class="upload-btn" onclick="uploadMemory()">Upload</button>
+    </div>
+
+    <!-- Wish Wall -->
+    <div class="wish-wall">
+        <h2>Leave a Wish for My 21st!</h2>
+        <textarea id="wish-text" class="input-field" placeholder="Your birthday message..."></textarea><br>
+        <button class="wish-btn" onclick="submitWish()">Submit Text Wish</button>
+    </div>
+
+    <script>
+        // Confetti effect
+        function confettiEffect() {
+            const confetti = document.getElementById('confetti');
+            const confettiHTML = '<img src="confetti.gif" style="position: absolute; top: 0; left: 0; z-index: 9999; animation: confetti 2s infinite;">';
+            confetti.innerHTML = confettiHTML;
+        }
+
+        // Check the answers in the game
+        function checkAnswer(answer) {
+            if (answer === 'night') {
+                alert('Correct! 🎉');
+                confettiEffect();
+            } else {
+                alert('Oops! Try again!');
+            }
+        }
+
+        function checkPhrase() {
+            const phrase = document.getElementById('phrase-answer').value.toLowerCase();
+            if (phrase === 'fill in the blank') { // Replace with the actual phrase
+                alert('Correct! 🎉');
+                confettiEffect();
+            } else {
+                alert('Oops! Try again!');
+            }
+        }
+
+        // Upload memory functionality
+        function uploadMemory() {
+            const memoryFile = document.getElementById('memory-upload').files[0];
+            if (memoryFile) {
+                alert('Memory uploaded successfully!');
+            } else {
+                alert('Please choose an image to upload.');
+            }
+        }
+
+        // Submit wish text
+        function submitWish() {
+            const wishText = document.getElementById('wish-text').value;
+            if (wishText) {
+                alert('Wish submitted! Thank you!');
+            } else {
+                alert('Please write a wish.');
+            }
+        }
+
+        // Initialize confetti
+        confettiEffect();
+    </script>
+</body>
+</html>
